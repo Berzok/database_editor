@@ -48,7 +48,7 @@ public class AskingYou extends JFrame implements ActionListener
 		if(parEvent.getSource() == connect);
 			try
 				{
-				mommy.createConnexion(saisiePseudo.getText(), saisiePassword.getText(), me);
+				mommy.createConnexion(mommy, saisiePseudo.getText(), saisiePassword.getText(), me);
 				} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

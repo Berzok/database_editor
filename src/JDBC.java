@@ -1,16 +1,24 @@
 import java.sql.*;
+import javax.swing.*;
+import javax.swing.event.*;
+import java.awt.event.*;
 
-public class JDBC
+
+public class JDBC extends JPanel implements ActionListener
 	{
 	static Connection chCo;
 	Statement chStmt;
 //	ResultSet resultat = chStmt.executeQuery("");
-	public static void main (String[] args) throws SQLException, ClassNotFoundException
+	public JDBC()
 		{
-		String url = "jdbc:oracle:thin:@madere:1521:info";
+		
 //		Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
 //		chCo = DriverManager.getConnection(url, "USER", "PASSWORD");
-		AskingYou whoAreYou = new AskingYou("Connexion...");
+//		AskingYou whoAreYou = new AskingYou("Connexion...");
+		
+		}
+	public void actionPerformed(ActionEvent parEvent)
+		{
 		
 		}
 	}
