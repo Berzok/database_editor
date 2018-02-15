@@ -5,11 +5,13 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.*;
+import java.sql.*;
 
-public class FenetreMere extends JFrame implements ActionListener
+public class FenetreMere extends JFrame
 	{
 	static String chPseudo;
 	static String chMotdepasse;
+	Connection chCo;
 	/**
 	 * 
 	 */
@@ -17,7 +19,7 @@ public class FenetreMere extends JFrame implements ActionListener
 //	ResultSet resultat = chStmt.executeQuery("");
 	public FenetreMere()
 		{
-		super("Outil d'édition de bases de données");
+		super("Outil d'ï¿½dition de bases de donnï¿½es");
 		this.setSize(600, 400);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -26,22 +28,35 @@ public class FenetreMere extends JFrame implements ActionListener
 	public static void main (String[] args) throws SQLException, ClassNotFoundException
 		{
 		FenetreMere laFenetre = new FenetreMere();
-//		chCo = DriverManager.getConnection(url, "USER", "PASSWORD");
 		AskingYou whoAreYou = new AskingYou("Connexion...", laFenetre);
 		}
 	
-	public void createConnexion (String parPseudo, String parPassword, AskingYou parYou) throws SQLException, ClassNotFoundException
+	public void createInterface(String parPseudo)
+		{
+		InterfaceG leContenu = new InterfaceG(this, chCo, chPseudo);
+		}
+	
+	public void createConnexion (FenetreMere parFenetre, String parPseudo, String parPassword, AskingYou parYou, int parServeur) throws SQLException, ClassNotFoundException
 		{
 		chPseudo = parPseudo; chMotdepasse = parPassword;
 		parYou.dispose();
-		String url = "jdbc:oracle:thin:@madere:1521:info";
+		String url = null;
+		if(parServeur == 1)
+			{
+			url = "jdbc:oracle:thin:@madere:1521:info";			
+			}
+		if(parServeur == 0)
+			{
+			url = "jdbc:oracle:thin:@setna:1521:info";
+			}
 		DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-		Connection chCo = DriverManager.getConnection(url, chPseudo, chMotdepasse);
+		chCo = DriverManager.getConnection(url, chPseudo, chMotdepasse);
+		this.createInterface(chPseudo);
 		}
-	
-	public void actionPerformed(ActionEvent parEvent)
+	public void actualiser()
 		{
-		
+		this.validate();
+		this.repaint();
 		}
 	}
 //Statement stmt = con.createStatement()

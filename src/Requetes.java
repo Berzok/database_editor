@@ -1,5 +1,5 @@
 /*
- * Exemple JDBC - Affichage des nomps des employés depuis la table EMP
+ * Exemple JDBC - Affichage des nomps des employï¿½s depuis la table EMP
  * Utilise le driver java pur JDBC THIN.  
  */
 import java.sql.*;
@@ -28,15 +28,15 @@ public class Requetes
 		{
 		Statement stmt = parCo.createStatement();
 		ResultSet resultat = stmt.executeQuery(chR);
-//		ResultSetMetaData result = resultat.getMetaData();
-//		int nbreColonnes = result.getColumnCount();
-//	    while (resultat.next ())
-//	    	{
-//	    	for(int i=1; i<=nbreColonnes; i++)
-//	    		{
-//	    		System.out.print(resultat.getString(i)+ "");
-//	    		}
-//	    	System.out.println("");
-//	    	}
+		ResultSetMetaData result = resultat.getMetaData();
+		int nbreColonnes = result.getColumnCount();
+	    while (resultat.next ())
+	    	{
+	    	for(int i=1; i<=nbreColonnes; i++)
+	    		{
+	    		System.out.print(resultat.getString(i)+ "");
+	    		}
+	    	System.out.println("");
+	    	}
 		}
 	}

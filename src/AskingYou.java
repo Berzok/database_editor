@@ -10,13 +10,13 @@ public class AskingYou extends JFrame implements ActionListener
 	public static JButton connect;
 	public static FenetreMere mommy;
 	public static AskingYou me;
+	public int chServeur;
 	public AskingYou(String parTitre, FenetreMere parFenetre)
 		{
 		super(parTitre);
 		this.setSize(275, 125);
 		this.setLocationRelativeTo(null);
 		mommy = parFenetre;
-		me = this;
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.createPanel();
 		this.setVisible(true);
@@ -48,13 +48,18 @@ public class AskingYou extends JFrame implements ActionListener
 		if(parEvent.getSource() == connect);
 			try
 				{
-				mommy.createConnexion(saisiePseudo.getText(), saisiePassword.getText(), me);
-				} catch (ClassNotFoundException e) {
+				mommy.createConnexion(mommy, saisiePseudo.getText(), saisiePassword.getText(), this, chServeur);
+				}
+			catch (ClassNotFoundException e)
+				{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			} catch (SQLException e) {
+				}
+			catch (SQLException e)
+				{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+				}
+		
 		}
 	}
