@@ -11,6 +11,7 @@ public class FenetreMere extends JFrame
 	{
 	static String chPseudo;
 	static String chMotdepasse;
+	static String chServeur = "madere";
 	Connection chCo;
 	/**
 	 * 
@@ -31,27 +32,27 @@ public class FenetreMere extends JFrame
 		AskingYou whoAreYou = new AskingYou("Connexion...", laFenetre);
 		}
 	
-	public void createInterface(String parPseudo)
+	public void createInterface(String parPseudo, String parServeur)
 		{
-		InterfaceG leContenu = new InterfaceG(this, chCo, chPseudo);
+		InterfaceG leContenu = new InterfaceG(this, chCo, chPseudo, chServeur);
 		}
 	
-	public void createConnexion (FenetreMere parFenetre, String parPseudo, String parPassword, AskingYou parYou, int parServeur) throws SQLException, ClassNotFoundException
+	public void createConnexion (FenetreMere parFenetre, String parPseudo, String parPassword, AskingYou parYou, boolean parMadere, String parServeur) throws SQLException, ClassNotFoundException
 		{
-		chPseudo = parPseudo; chMotdepasse = parPassword;
+		chPseudo = parPseudo; chMotdepasse = parPassword; chServeur = parServeur;
 		parYou.dispose();
 		String url = null;
-		if(parServeur == 1)
+		if(parMadere)
 			{
 			url = "jdbc:oracle:thin:@madere:1521:info";			
 			}
-		if(parServeur == 0)
+		else
 			{
 			url = "jdbc:oracle:thin:@setna:1521:info";
 			}
 		DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
 		chCo = DriverManager.getConnection(url, chPseudo, chMotdepasse);
-		this.createInterface(chPseudo);
+		this.createInterface(chPseudo, chServeur);
 		}
 	public void actualiser()
 		{
